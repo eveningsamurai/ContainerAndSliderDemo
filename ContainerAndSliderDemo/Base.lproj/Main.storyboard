@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PDd-fz-fT5" userLabel="menuView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PDd-fz-fT5" userLabel="menuView">
                                 <rect key="frame" x="-290" y="64" width="290" height="603"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jv1-gh-ona">
@@ -32,7 +32,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="290" height="85"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cCd-Zl-tfj" id="9WB-TC-DPZ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="290" height="84"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="290" height="84.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -51,7 +51,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="PDd-fz-fT5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="34D-fK-1yx"/>
+                            <constraint firstItem="PDd-fz-fT5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-290" id="34D-fK-1yx"/>
                             <constraint firstItem="PDd-fz-fT5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="WMA-Vn-v6m"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PDd-fz-fT5" secondAttribute="bottom" id="Y3n-VM-CsK"/>
                         </constraints>
@@ -78,7 +78,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FEu-D1-weZ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="ETr-4X-zzL">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" id="ETr-4X-zzL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
