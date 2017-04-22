@@ -12,7 +12,9 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBarButton: UIBarButtonItem!
+    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
     
+    var menuShowing = false
     var currentViewController: UIViewController?
     //instantiation for the profile view controller
     var profileViewController: ProfileViewController  {
@@ -23,7 +25,7 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let viewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
         
         // Add View Controller as Child View Controller
-        self.add(asChildViewController: viewController)
+        //self.add(asChildViewController: viewController)
         
         return viewController
     }
@@ -37,7 +39,7 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let viewController = storyboard.instantiateViewController(withIdentifier: "TimelineViewController") as! TimelineViewController
         
         // Add View Controller as Child View Controller
-        self.add(asChildViewController: viewController)
+        //self.add(asChildViewController: viewController)
         
         return viewController
     }
@@ -51,7 +53,7 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let viewController = storyboard.instantiateViewController(withIdentifier: "MentionsViewController") as! MentionsViewController
         
         // Add View Controller as Child View Controller
-        self.add(asChildViewController: viewController)
+        //self.add(asChildViewController: viewController)
         
         return viewController
     }
@@ -61,7 +63,8 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         addChildViewController(viewController)
         
         // Add Child View as Subview
-        view.addSubview(viewController.view)
+        //view.addSubview(viewController.view)
+        //view.insertSubview(viewController.view, at: 0)
         
         // Configure Child View
         viewController.view.frame = view.bounds
@@ -69,7 +72,9 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // Notify Child View Controller
         viewController.didMove(toParentViewController: self)
+        
     }
+
     
     private func remove(asChildViewController viewController: UIViewController) {
         // Notify Child View Controller
@@ -93,14 +98,20 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         currentViewController = profileViewController
     }
     
-    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
     @IBAction func onMenuTap(_ sender: Any) {
-        leadingConstraint.constant = 0
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.layoutIfNeeded()
-        })
+        if menuShowing {
+            leadingConstraint.constant = -290
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            leadingConstraint.constant = 0
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+        menuShowing = !menuShowing
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
@@ -125,18 +136,26 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         switch indexPath.row {
         case 0:
             remove(asChildViewController: currentViewController!)
+            currentViewController = profileViewController
             add(asChildViewController: profileViewController)
+            view.layoutIfNeeded()
             break
         case 1:
             remove(asChildViewController: currentViewController!)
+            currentViewController = timeLineViewController
             add(asChildViewController: timeLineViewController)
+            view.layoutIfNeeded()
             break
         case 2:
             remove(asChildViewController: currentViewController!)
+            currentViewController = mentionsViewController
             add(asChildViewController: mentionsViewController)
+            view.layoutIfNeeded()
             break
         default:
             print("Error")
