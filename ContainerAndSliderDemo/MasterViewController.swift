@@ -16,55 +16,18 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var menuShowing = false
     var currentViewController: UIViewController?
-    //instantiation for the profile view controller
-    var profileViewController: ProfileViewController  {
-        // Load Storyboard
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        // Instantiate View Controller
-        let viewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-        
-        // Add View Controller as Child View Controller
-        //self.add(asChildViewController: viewController)
-        
-        return viewController
-    }
+    var profileViewController: UIViewController?
+    var timelineViewController: UIViewController?
+    var mentionsViewController: UIViewController?
     
-    //instantiation for the timeline view controller
-    var timeLineViewController: TimelineViewController {
-        // Load Storyboard
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        // Instantiate View Controller
-        let viewController = storyboard.instantiateViewController(withIdentifier: "TimelineViewController") as! TimelineViewController
-        
-        // Add View Controller as Child View Controller
-        //self.add(asChildViewController: viewController)
-        
-        return viewController
-    }
-    
-    //instantiation for the profile view controller
-    var mentionsViewController: MentionsViewController {
-        // Load Storyboard
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        // Instantiate View Controller
-        let viewController = storyboard.instantiateViewController(withIdentifier: "MentionsViewController") as! MentionsViewController
-        
-        // Add View Controller as Child View Controller
-        //self.add(asChildViewController: viewController)
-        
-        return viewController
-    }
-    
+    //addd a controller to view
     private func add(asChildViewController viewController: UIViewController) {
         // Add Child View Controller
         addChildViewController(viewController)
         
         // Add Child View as Subview
         //view.addSubview(viewController.view)
-        //view.insertSubview(viewController.view, at: 0)
+        view.insertSubview(viewController.view, at: 0)
         
         // Configure Child View
         viewController.view.frame = view.bounds
@@ -75,7 +38,7 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
 
-    
+    //remove the controller from view
     private func remove(asChildViewController viewController: UIViewController) {
         // Notify Child View Controller
         viewController.willMove(toParentViewController: nil)
@@ -95,7 +58,15 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
+        //setting up the storyboard and instantiating the controllers
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        profileViewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        timelineViewController = storyboard.instantiateViewController(withIdentifier: "TimelineViewController") as! TimelineViewController
+        mentionsViewController = storyboard.instantiateViewController(withIdentifier: "MentionsViewController") as! MentionsViewController
+        
+        //setting the default controller as the profile view controller
         currentViewController = profileViewController
+        add(asChildViewController: currentViewController!)
     }
     
     @IBAction func onMenuTap(_ sender: Any) {
@@ -142,20 +113,17 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         case 0:
             remove(asChildViewController: currentViewController!)
             currentViewController = profileViewController
-            add(asChildViewController: profileViewController)
-            view.layoutIfNeeded()
+            add(asChildViewController: profileViewController!)
             break
         case 1:
             remove(asChildViewController: currentViewController!)
-            currentViewController = timeLineViewController
-            add(asChildViewController: timeLineViewController)
-            view.layoutIfNeeded()
+            currentViewController = timelineViewController
+            add(asChildViewController: timelineViewController!)
             break
         case 2:
             remove(asChildViewController: currentViewController!)
             currentViewController = mentionsViewController
-            add(asChildViewController: mentionsViewController)
-            view.layoutIfNeeded()
+            add(asChildViewController: mentionsViewController!)
             break
         default:
             print("Error")
